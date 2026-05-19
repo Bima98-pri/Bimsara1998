@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Sample Check</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="page">
+        <header class="hero">
+            <div class="hero-content">
+                <img src="/static/logo.jpeg" alt="Ocean Foods Logo" class="logo">
+                <h1>Incoming Inspection Report</h1>
+                <p>Ocean Foods Manufacturing (Pvt) Ltd.</p>
+            </div>
+        </header>
+
+        <main class="card-layout">
+            <section class="card form-card">
+                <h2>Sample Details</h2>
+                <form method="post">
+                    <label>Sample weight (kg)</label>
+                    <input type="number" name="sample_weight" step="0.001" min="0" placeholder="e.g. 10" required>
+
+                    <label>Cut Fish Weight (kg)</label>
+                    <input type="number" name="cut_fish_weight" step="0.001" min="0" placeholder="e.g. 2" required>
+
+                    <label>Total filling weight for 425g cans (kg)</label>
+                    <input type="number" name="total_filling_weight_425g" step="0.001" min="0" placeholder="e.g. 1.5" required>
+
+                    <label>Total filling weight for 155g cans (kg)</label>
+                    <input type="number" name="total_filling_weight_155g" step="0.001" min="0" placeholder="e.g. 1.2" required>
+
+                    <label>Total filling weight for 200g cans (kg)</label>
+                    <input type="number" name="total_filling_weight_200g" step="0.001" min="0" placeholder="e.g. 1.8" required>
+
+                    <label>Number of 425g cans</label>
+                    <input type="number" name="count_425g" min="0" placeholder="e.g. 5" required>
+
+                    <label>Number of 155g cans</label>
+                    <input type="number" name="count_155g" min="0" placeholder="e.g. 8" required>
+
+                    <label>Number of 200g cans</label>
+                    <input type="number" name="count_200g" min="0" placeholder="e.g. 10" required>
+
+                    <button type="submit">Calculate</button>
+                </form>
+            </section>
+
+            <section class="card result-card">
+                <h2>Result Summary</h2>
+                {% if result %}
+                    {% if result.error %}
+                        <div class="alert">{{ result.error }}</div>
+                    {% else %}
+                        <div class="value-row"><span>Sample weight</span><strong>{{ result.sample_weight }} kg</strong></div>
+                        <div class="value-row"><span>Cut fish weight</span><strong>{{ result.cut_fish_weight }} kg</strong></div>
+                        <div class="value-row"><span>Waste weight</span><strong>{{ result.waste_weight }} kg</strong></div>
+                        <div class="value-row"><span>Waste percentage</span><strong>{{ result.waste_percentage }}%</strong></div>
+                        <div class="value-row"><span>425g can percentage</span><strong>{{ result.can_pct_425g }}%</strong></div>
+                        <div class="value-row"><span>425g recovery</span><strong>{{ result.recovery_425g }}</strong></div>
+                        <div class="value-row"><span>155g can percentage</span><strong>{{ result.can_pct_155g }}%</strong></div>
+                        <div class="value-row"><span>155g recovery</span><strong>{{ result.recovery_155g }}</strong></div>
+                        <div class="value-row"><span>200g can percentage</span><strong>{{ result.can_pct_200g }}%</strong></div>
+                        <div class="value-row"><span>200g recovery</span><strong>{{ result.recovery_200g }}</strong></div>
+                        <div class="value-row"><span>Total can count</span><strong>{{ result.total_can_count }}</strong></div>
+                        <div class="value-row"><span>Total filling weight</span><strong>{{ result.total_filling_weight }} kg</strong></div>
+                        <div class="value-row"><span>Average filling weight for 425g cans</span><strong>{{ result.avg_fill_425g }} kg</strong></div>
+                        <div class="value-row"><span>Average filling weight for 155g cans</span><strong>{{ result.avg_fill_155g }} kg</strong></div>
+                        <div class="value-row"><span>Average filling weight for 200g cans</span><strong>{{ result.avg_fill_200g }} kg</strong></div>
+                    {% endif %}
+                {% else %}
+                    <p>Fill in the sample data to see the calculated waste percentage and average can weight.</p>
+                {% endif %}
+            </section>
+        </main>
+        <div class="site-credit">Created by Bimsara Priyamantha</div>
+    </div>
+</body>
+</html>
